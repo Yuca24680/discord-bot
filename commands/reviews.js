@@ -28,7 +28,7 @@ async function runMatthewsBot(interaction) {
 async function getReviews(interaction) {
   const place = interaction.options.getString('place')
 
-  const { data: { candidates} } = await axios.get(`${PLACE_API}/findplacefromtext/json?key=${process.env.GOOGLE_API_KEY}`, generateGetPlacePayload(place))
+  const { data: { candidates } } = await axios.get(`${PLACE_API}/findplacefromtext/json?key=${process.env.GOOGLE_API_KEY}`, generateGetPlacePayload(place))
   const { place_id } = candidates[0];
 
   const { data: { result } } = await axios.get(`${PLACE_API}/details/json?key=${process.env.GOOGLE_API_KEY}`, generatePlaceDetailsPayload(place_id))
