@@ -13,17 +13,20 @@ module.exports = {
         .setDescription('name of place')
         .setRequired(true)),
   async execute(interaction) {
-    await getReviews(interaction);
+    await runMatthewsBot(interaction);
   },
 };
 
 // Refer to Matthew's bot instead
-async function getReviews(interaction) {
-  const place = interaction.options.getString('place')
+async function runMatthewsBot(interaction) {
   return interaction.reply({
     ephemeral: true, // Show privatly
     content: `Run \`=r ${place}\` instead`
   })
+}
+
+async function getReviews(interaction) {
+  const place = interaction.options.getString('place')
 
   const { data: { candidates} } = await axios.get(`${PLACE_API}/findplacefromtext/json?key=${process.env.GOOGLE_API_KEY}`, generateGetPlacePayload(place))
   const { place_id } = candidates[0];
